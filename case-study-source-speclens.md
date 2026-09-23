@@ -54,7 +54,7 @@ Next.js, TypeScript, Python, FastAPI, PostgreSQL, LangGraph, and retrieval-augme
 
 ## Authorized outcome wording
 
-- 300+ signed-up users.
+- 300+ signed-up users in first month.
 - Live in production.
 - Used by procurement teams across multiple industries.
 

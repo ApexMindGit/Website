@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Arrow, CTABand } from "../components/ui";
+import Button from "../components/button";
 import { CONTACT } from "../components/nav-data";
 import HighlightedProjects from "../components/highlighted-projects";
 import FeaturedCarousel from "../components/featured-carousel";
@@ -88,6 +89,7 @@ const orgSchema = {
     "Software development",
     "AI consulting and implementation",
     "Workflow automation",
+    "Robotic Process Automation",
     "System integrations",
     "Government software",
   ],
@@ -127,14 +129,10 @@ export default function Home() {
               <span>Built around your problem.</span>
             </h1>
             <div className="actions">
-              <Link className="button" href="/contact">
-                <Arrow />
-                Start a conversation
-              </Link>
-              <Link className="text-link" href="/case-studies">
-                <Arrow />
+              <Button href="/contact">Start a conversation</Button>
+              <Button href="/case-studies" variant="secondary">
                 Explore our work
-              </Link>
+              </Button>
             </div>
           </div>
           <div className="hero-foot">
@@ -148,34 +146,24 @@ export default function Home() {
               <span>AI implementation</span>
               <span>Workflow automation</span>
             </div>
-            <div className="studio-hero-bottom">
-              <span>
-                Based in Lucknow.
-                <br />
-                Working in India and globally.
-              </span>
-              <span>
-                APEX MIND LLP
-                <br />
-                EST. 2026
-              </span>
-            </div>
           </div>
         </div>
         <aside className="studio-side">
           <FeaturedCarousel />
-          <Link href="/how-we-work" className="studio-engagement">
-            <span className="eyebrow">Two ways to work together</span>
+          <div className="studio-engagement">
+            <span className="eyebrow">Built to ship</span>
             <h3>
-              A defined project.
+              Idea to live product —
               <br />
-              Or ongoing support.
+              in weeks, not quarters.
             </h3>
-            <span>
-              <Arrow />
-              Let&rsquo;s talk about it
+            <span className="studio-engagement-note">
+              SpecLens: MVP in 8 weeks
             </span>
-          </Link>
+            <Button href="/how-we-work" variant="light" className="engagement-cta">
+              How we work
+            </Button>
+          </div>
         </aside>
       </section>
 
@@ -213,7 +201,7 @@ export default function Home() {
       <section className="process-band">
         <div className="container process-band-inner">
           <div className="process-copy">
-            <p className="eyebrow">How we work / Approved process</p>
+            <p className="eyebrow">How we work / Our process</p>
             <h2 className="display-md">
               A clear path.
               <br />
@@ -229,9 +217,9 @@ export default function Home() {
               See how we work
             </Link>
           </div>
-          <div className="process-summary" aria-label="Project starting point">
-            <span className="mono-label">Before code</span>
-            <p>We agree what done means.</p>
+          <div className="process-summary" aria-label="How we start">
+            <span className="mono-label">Before we build</span>
+            <p>We agree what &ldquo;done&rdquo; looks like.</p>
           </div>
           <div className="process-grid">
             {processes.map((p, i) => (
@@ -266,10 +254,7 @@ export default function Home() {
               Everything you need to know about working with Apex Mind — from
               engagement models and process to where we work and how we start.
             </p>
-            <Link className="button" href="/how-we-work">
-              <Arrow />
-              More on how we work
-            </Link>
+            <Button href="/how-we-work">More on how we work</Button>
           </div>
           <FaqAccordion items={faqs} />
         </div>

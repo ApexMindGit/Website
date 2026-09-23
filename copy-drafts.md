@@ -49,7 +49,7 @@ A. Based in Lucknow, building software for clients in India and globally.
 
 B. Software development, AI implementation, and automation from a Lucknow consultancy.
 
-C. Behind SpecLens, a live procurement product with 300+ signed-up users.
+C. Behind SpecLens, a live procurement product with 300+ signed-up users in first month.
 
 ## 4. Problem cards
 
@@ -156,7 +156,7 @@ For your project, useful starting information includes sample inputs, the output
 
 There is a difference between wanting AI and defining a job for an AI system. A useful starting description names the information involved, the task to perform, and the result someone needs to use. Apex Mind provides consulting and implementation to address AI requirements in software and workflows.
 
-The SpecLens case study shows a concrete application. Procurement teams compare vendor specification sheets that contain inconsistent units and missing fields. SpecLens extracts specifications, normalizes information, and produces a structured comparison matrix with citations back to the source documents. It is live in production with 300+ signed-up users.
+The SpecLens case study shows a concrete application. Procurement teams compare vendor specification sheets that contain inconsistent units and missing fields. SpecLens extracts specifications, normalizes information, and produces a structured comparison matrix with citations back to the source documents. It is live in production with 300+ signed-up users in first month.
 
 Your requirement may have a different shape. Tell us what happens today, where the difficulty lies, and what a useful output would look like. Include any existing software or relevant document formats so the conversation begins with the actual task rather than a technology label.
 
@@ -202,19 +202,19 @@ Each variant contains two paragraphs of 80–120 words each, following the more 
 
 Apex Mind LLP is a software consultancy based in Lucknow, India, serving clients in India and globally. Founded in 2026 by Aryan Rawther, the company works across software development, AI consulting and implementation, and workflow automation. Its capabilities also include system integrations, software modernization, optimization, maintenance, mobile app development, and government software projects. The starting point is the problem a client brings: something they need to build, a workflow they want to change, or existing software that needs attention.
 
-SpecLens provides a concrete example of the work behind Apex Mind. Built by Aryan, the product addresses the manual comparison of product specification sheets across vendors. Its AI pipeline reads vendor documents and produces a structured comparison matrix with citations back to source pages. The first version focused on that single flow, from uploaded documents to a comparison. SpecLens is now live in production, with 300+ signed-up users, and is used by procurement teams across multiple industries. Its case study explains the problem, approach, and technical implementation.
+SpecLens provides a concrete example of the work behind Apex Mind. Built by Aryan, the product addresses the manual comparison of product specification sheets across vendors. Its AI pipeline reads vendor documents and produces a structured comparison matrix with citations back to source pages. The first version focused on that single flow, from uploaded documents to a comparison. SpecLens is now live in production, with 300+ signed-up users in first month, and is used by procurement teams across multiple industries. Its case study explains the problem, approach, and technical implementation.
 
 ### B
 
 Software development begins with a requirement, but that requirement does not always arrive as a specification. Sometimes it starts as a product idea, a repeated task, or a system that needs to work differently. Apex Mind LLP is a software consultancy founded by Aryan Rawther in 2026 to work on these kinds of problems. Based in Lucknow, India, it serves clients in India and globally through software development, AI consulting and implementation, and workflow automation. Related capabilities include integrations, modernization, optimization, maintenance, mobile applications, and government software projects.
 
-Aryan’s background combines full-stack development and AI systems work, including experience at CombineHealth and Egnyte. He also built SpecLens, an AI-powered product for procurement specification comparison. SpecLens reads vendor documents, extracts and normalizes specifications, and creates comparison matrices with source-page citations. It is live in production with 300+ signed-up users and is used by procurement teams across multiple industries. That product gives visitors a specific example to examine alongside Apex Mind’s capabilities, from the original document-comparison problem to the architecture behind the current application.
+Aryan’s background combines full-stack development and AI systems work, including experience at CombineHealth and Egnyte. He also built SpecLens, an AI-powered product for procurement specification comparison. SpecLens reads vendor documents, extracts and normalizes specifications, and creates comparison matrices with source-page citations. It is live in production with 300+ signed-up users in first month and is used by procurement teams across multiple industries. That product gives visitors a specific example to examine alongside Apex Mind’s capabilities, from the original document-comparison problem to the architecture behind the current application.
 
 ### C
 
 Apex Mind LLP brings software development, AI consulting and implementation, and workflow automation under one consultancy. Founded in 2026 and based in Lucknow, India, the company serves clients in India and globally. Founder Aryan Rawther comes from a background in full-stack development and AI systems. Clients can approach Apex Mind with the problem they are facing, whether it involves new software, an existing application, or a process that needs to change. The technical discussion follows from what they are trying to accomplish.
 
-The consultancy’s capabilities extend to system integrations, software modernization, optimization, maintenance, mobile apps, and government software projects. SpecLens, built by Aryan, is the featured product: an AI-powered application that compares procurement specifications across vendor documents. Its first version accepted uploaded documents and returned a comparison matrix. The current pipeline includes extraction, unit normalization, cross-vendor alignment, confidence scoring, and executive-summary generation. SpecLens is live in production with 300+ signed-up users and is used by procurement teams across multiple industries. The case study provides further detail about its development.
+The consultancy’s capabilities extend to system integrations, software modernization, optimization, maintenance, mobile apps, and government software projects. SpecLens, built by Aryan, is the featured product: an AI-powered application that compares procurement specifications across vendor documents. Its first version accepted uploaded documents and returned a comparison matrix. The current pipeline includes extraction, unit normalization, cross-vendor alignment, confidence scoring, and executive-summary generation. SpecLens is live in production with 300+ signed-up users in first month and is used by procurement teams across multiple industries. The case study provides further detail about its development.
 
 ## 9. Founder biography
 
@@ -346,13 +346,13 @@ B. Learn how to begin a software conversation with Apex Mind. Share the problem 
 
 ### /case-studies
 
-A. Explore Apex Mind’s featured SpecLens case study: AI-powered procurement specification comparison, live in production with 300+ signed-up users.
+A. Explore Apex Mind’s featured SpecLens case study: AI-powered procurement specification comparison, live in production with 300+ signed-up users in first month.
 
 B. Read about SpecLens, the featured product from Apex Mind’s founder, and its AI pipeline for extracting and comparing specifications across vendor documents.
 
 ### /case-studies/speclens
 
-A. See how SpecLens reads vendor documents and produces specification comparison matrices with source citations. Live in production with 300+ signed-up users.
+A. See how SpecLens reads vendor documents and produces specification comparison matrices with source citations. Live in production with 300+ signed-up users in first month.
 
 B. Explore the problem and AI pipeline behind SpecLens, a procurement specification comparison product used by procurement teams across multiple industries.
 

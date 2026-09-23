@@ -11,6 +11,7 @@ import {
   Mail,
   MessageCircle,
 } from "lucide-react";
+import Button from "../app/components/button";
 
 const sections = [
   ["direction", "Direction"],
@@ -295,14 +296,10 @@ export default function DesignReference() {
               to <span>working software.</span>
             </h1>
             <div className="actions">
-              <a className="button" href="#sample-form">
-                <Arrow />
-                Start a conversation
-              </a>
-              <a className="text-link" href="#selected-work">
-                <Arrow />
+              <Button href="#sample-form">Start a conversation</Button>
+              <Button href="#selected-work" variant="secondary">
                 Explore our work
-              </a>
+              </Button>
             </div>
             <p className="studio-description">
               Apex Mind is a software consultancy helping teams build software,
@@ -336,7 +333,7 @@ export default function DesignReference() {
                 specification comparison.
               </p>
               <div className="studio-metric">
-                300+<span>signed-up users</span>
+                300+<span>signed-up users in first month</span>
               </div>
               <span className="studio-project-cta">
                 <Arrow />
@@ -552,52 +549,16 @@ export default function DesignReference() {
               <div>
                 <h3 className="h4">Actions</h3>
                 <p className="caption muted">
-                  Default, hover, focus, disabled, and loading.
+                  Primary and secondary share one animated interaction — hover
+                  to see it. Disabled shown for reference.
                 </p>
               </div>
               <div className="component-examples">
-                <button
-                  className="button"
-                  onClick={() =>
-                    document
-                      .getElementById("sample-form")
-                      ?.scrollIntoView({ behavior: "auto" })
-                  }
-                >
-                  Start a conversation <Arrow />
-                </button>
-                <button className="button state-hover">
-                  Hover state <Arrow />
-                </button>
-                <button className="button state-focus">
-                  Focus state <Arrow />
-                </button>
-                <button className="button" disabled>
-                  Unavailable <Arrow />
-                </button>
-                <button
-                  className="button"
-                  aria-busy={loading}
-                  disabled={loading}
-                  onClick={() => {
-                    setLoading(true);
-                    loadingTimer.current = setTimeout(
-                      () => setLoading(false),
-                      1400,
-                    );
-                  }}
-                >
-                  {loading ? "Sending…" : "Try loading state"}
-                  <span
-                    className={loading ? "loading-dots" : ""}
-                    aria-hidden="true"
-                  >
-                    {loading ? "···" : <Arrow />}
-                  </span>
-                </button>
-                <a className="text-link" href="#layouts">
-                  Explore our work <Arrow diagonal />
-                </a>
+                <Button href="#sample-form">Start a conversation</Button>
+                <Button href="#selected-work" variant="secondary">
+                  Explore our work
+                </Button>
+                <Button disabled>Unavailable</Button>
               </div>
             </div>
             <div className="component-row">
@@ -612,7 +573,7 @@ export default function DesignReference() {
                 <span className="tag">Live in production</span>
                 <div className="metric">
                   <span>300+</span>
-                  <p className="mono-sm">Signed-up users / SpecLens</p>
+                  <p className="mono-sm">Signed-up users in first month / SpecLens</p>
                 </div>
               </div>
             </div>
@@ -929,7 +890,7 @@ export default function DesignReference() {
                 </p>
                 <div className="metric">
                   <span>300+</span>
-                  <p className="mono-sm">Signed-up users</p>
+                  <p className="mono-sm">Signed-up users in first month</p>
                 </div>
               </div>
             </div>

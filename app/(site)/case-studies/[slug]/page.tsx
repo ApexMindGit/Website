@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Arrow, CTABand } from "../../../components/ui";
+import { Arrow, CTABand, MediaSlot } from "../../../components/ui";
 import {
   caseStudies,
   getCaseStudy,
@@ -69,6 +69,12 @@ export default async function CaseStudyPage({
           </div>
         </div>
       </section>
+
+      {study.media && (
+        <section className="container case-media">
+          <MediaSlot label={study.title} media={study.media} ratio="16:9" />
+        </section>
+      )}
 
       <section className="section container">
         <div className="content-columns">

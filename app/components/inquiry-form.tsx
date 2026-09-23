@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Check, ChevronDown } from "lucide-react";
-import { Arrow } from "./ui";
+import Button from "./button";
 
 const engagementOptions = [
   "Fixed-scope project",
@@ -125,10 +125,9 @@ export default function InquiryForm() {
       </div>
 
       <div className="full form-submit">
-        <button className="button" type="submit" disabled={submitting}>
+        <Button type="submit" disabled={submitting}>
           {submitting ? "Sending…" : "Send inquiry"}
-          <Arrow />
-        </button>
+        </Button>
         <p className="caption muted" role="status">
           Preview form — nothing is sent or stored yet.
         </p>

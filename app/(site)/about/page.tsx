@@ -55,8 +55,8 @@ export default function About() {
               vendor documents and produces a structured comparison matrix with
               citations back to source pages. The first version focused on that
               single flow, from uploaded documents to a comparison. SpecLens is
-              now live in production, with 300+ signed-up users, and is used by
-              procurement teams across multiple industries.
+              now live in production, with 300+ signed-up users in the first
+              month, and is used by procurement teams across multiple industries.
             </p>
             <Link className="text-link" href="/case-studies/speclens">
               <Arrow />

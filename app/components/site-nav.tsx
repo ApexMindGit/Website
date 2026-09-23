@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { primaryNav } from "./nav-data";
 import { Arrow } from "./ui";
+import Button from "./button";
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
@@ -15,6 +16,7 @@ export default function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [hidden, setHidden] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const menuPanel = useRef<HTMLDivElement>(null);
 
@@ -23,6 +25,32 @@ export default function SiteHeader() {
     setMenuOpen(false);
     setOpenDropdown(null);
   }, [pathname]);
+
+  // Hide the header when scrolling down, reveal it as soon as you scroll up.
+  useEffect(() => {
+    let last = window.scrollY;
+    let raf = 0;
+    const check = () => {
+      raf = 0;
+      const y = window.scrollY;
+      if (menuOpen) {
+        setHidden(false);
+      } else if (y > last && y > 120) {
+        setHidden(true);
+      } else if (y < last) {
+        setHidden(false);
+      }
+      last = y;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(check);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [menuOpen]);
 
   // Mobile menu: lock scroll, focus first link, trap focus, Escape to close.
   useEffect(() => {
@@ -44,7 +72,7 @@ export default function SiteHeader() {
   }, [menuOpen]);
 
   return (
-    <header className="site-header">
+    <header className={`site-header${hidden ? " is-hidden" : ""}`}>
       <div className="container nav-inner">
         <Link className="wordmark" href="/" aria-label="Apex Mind, home">
           <span className="logo-mark logo-mark-on-dark" aria-hidden="true">
@@ -98,9 +126,9 @@ export default function SiteHeader() {
           )}
         </nav>
 
-        <Link className="nav-end" href="/contact">
-          Contact <Arrow diagonal />
-        </Link>
+        <Button href="/contact" variant="light" className="nav-cta">
+          Let&rsquo;s talk
+        </Button>
 
         <button
           className="menu-toggle"

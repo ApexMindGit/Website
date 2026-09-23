@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { CONTACT } from "./nav-data";
+import Button from "./button";
 
 export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return diagonal ? (
@@ -35,6 +36,35 @@ export function ImageSlot({
         <br />
         {ratio} / SOURCE: NEEDED
       </span>
+    </div>
+  );
+}
+
+/** Looping, muted demo video (autoplays, no controls). Falls back to the
+    labeled ImageSlot placeholder when no source is supplied. */
+export function MediaSlot({
+  label,
+  media,
+  ratio = "16:10",
+}: {
+  label: string;
+  media?: { src: string; poster?: string };
+  ratio?: string;
+}) {
+  if (!media) return <ImageSlot label={label} ratio={ratio} />;
+  return (
+    <div className="media-slot">
+      <video
+        className="media-slot-video"
+        src={media.src}
+        poster={media.poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={`${label} — product demo`}
+      />
     </div>
   );
 }
@@ -94,6 +124,7 @@ export function CTABand({
     "Software development",
     "AI implementation",
     "Workflow automation",
+    "Robotic Process Automation",
     "System integrations",
     "Government software",
     "Monthly retainers",
@@ -106,10 +137,9 @@ export function CTABand({
         <h2 className="display-md">{title}</h2>
         {body && <p className="cta-band-body">{body}</p>}
         <div className="actions">
-          <Link className="button" href="/contact">
-            <Arrow />
+          <Button href="/contact" variant="light">
             Get a Custom Quote
-          </Link>
+          </Button>
           <a className="text-link" href={CONTACT.whatsappHref}>
             <Arrow diagonal />
             Message on WhatsApp

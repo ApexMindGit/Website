@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Arrow } from "../../../components/ui";
+import Button from "../../../components/button";
 import { CONTACT } from "../../../components/nav-data";
 
 export const metadata: Metadata = {
@@ -24,14 +23,10 @@ export default function Received() {
           This is a preview build — no inquiry was actually sent or stored yet.
         </p>
         <div className="actions">
-          <Link className="button" href="/">
-            <Arrow />
-            Back to home
-          </Link>
-          <a className="text-link" href={CONTACT.whatsappHref}>
-            <Arrow diagonal />
+          <Button href="/">Back to home</Button>
+          <Button href={CONTACT.whatsappHref} variant="secondary">
             Message on WhatsApp
-          </a>
+          </Button>
         </div>
       </div>
     </section>

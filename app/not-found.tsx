@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Button from "./components/button";
 
 export default function NotFound() {
   return (
@@ -17,14 +17,10 @@ export default function NotFound() {
         <h1 className="display-md">This page took a wrong turn.</h1>
         <p>The page you are looking for does not exist or has moved.</p>
         <div className="actions">
-          <Link className="button" href="/">
-            <ArrowRight size={20} strokeWidth={1.5} aria-hidden="true" />
-            Back to home
-          </Link>
-          <Link className="text-link" href="/what-we-do">
-            <ArrowRight size={20} strokeWidth={1.5} aria-hidden="true" />
+          <Button href="/">Back to home</Button>
+          <Button href="/what-we-do" variant="secondary">
             Explore what we do
-          </Link>
+          </Button>
         </div>
       </div>
     </main>

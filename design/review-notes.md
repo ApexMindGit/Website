@@ -71,7 +71,7 @@ Routes created (all static): `/`, `/what-we-do` (+ `/build`, `/intelligence`, `/
 Copy is provisional per the founder's "visual first" instruction (headline #2, subhead A, problem
 Set A, pillars A, About A, founder bio A, government hero A, footer tagline A; meta descriptions A).
 Per copy-drafts §14.5 the "coming soon" case teasers are omitted and SpecLens is shown alone. Only
-authorized SpecLens wording is used (300+ signed-up users; live in production; used by procurement
+authorized SpecLens wording is used (300+ signed-up users in first month; live in production; used by procurement
 teams across multiple industries) with no named clients, metrics, prices, or certification marks
 (registrations listed as text, marks pending). Images remain labeled placeholders. `robots:index:false`
 is set site-wide until launch. The inquiry form has no backend yet — it routes to `/contact/received`
@@ -209,6 +209,150 @@ stays noindex until launch.
 - Verification: `npm run build` = 28 static pages, no errors; dev render confirmed homepage creds gone,
   FAQ two-column with working expand, 6 footer credential chips, and the ~269px brandmark, with no
   horizontal overflow at desktop width.
+
+## Homepage revision: process section restyle, type + motion tweaks
+
+- **Process ("A clear path") section restyled for consistency**: dropped the busy grid-line background,
+  glassmorphism, and bright cyan `#39c8ff`; now a clean full-bleed dark band (`#0f0f11`) with one subtle
+  blue glow, a two-column intro + highlight card, and the 5 approved stages as a connected "path" of
+  columns with a blue (`#3b6bff`) top-tick on hover — matching the site's calmer language and blue accent.
+  Data kept: eyebrow "How we work / Our process", "A clear path. Room for conversation." heading, a
+  problem-first lead, "See how we work" link, the five stages (title + one line each), and a tightened
+  highlight card ("Before we build / We agree what 'done' looks like.").
+- **Type reduced**: hero H1 clamp max 64→54px (≈47px at 1265w) and the scroll-reveal lines 68→50px.
+- **Aurora sped up ~3×**: `aurora-flow` and `cta-aurora-flow` 18s/16s → 6s (hero card, services banner,
+  CTA band).
+- Verification: `npm run build` = 28 static pages, no errors; DOM confirmed the flat dark process band,
+  5-column path, blue tick, reduced type sizes, and 6s aurora, with no overflow.
+
+## Homepage revision: animated primary button + hero grey gradient
+
+- **New primary `Button` component** (`app/components/button.tsx`) with a layered hover interaction:
+  the black chip expands left→right to fill the whole pill, the dark label slides up while a white
+  label rises from below, and the arrow slides out to the left as a new white arrow enters from the
+  left. Renders as Link / a / button (supports `type`, `disabled`, and a `light` variant for the CTA
+  band). All motion behind `prefers-reduced-motion`; keyboard focus triggers the same reveal.
+  Migrated every `.button` usage (hero, FAQ, CTA band, works "All projects"/"View case", inquiry
+  submit, received, 404) to it. Verified on hover: fill right→0 + radius→10px, label-out up / label-in
+  in, icon-out left / icon-in in.
+- **Hero grey gradient**: replaced the faint bottom-left sheen with a soft grey gradient — a bright
+  diagonal streak with grey pooling toward the lower-right and edges (radial + linear on
+  `.studio-hero::after`).
+- Verification: `npx tsc --noEmit` clean; `npm run build` = 28 static pages, no errors; the hovered
+  button and hero gradient confirmed in a screenshot.
+
+## Fix: invalid easing token + button retuned to the Beew reference
+
+- **Bug found & fixed:** `--ease-out-soft` was `cubic-bezier(0.22, 1, 0, 0.36, 1)` — **five** values, which
+  is invalid (cubic-bezier needs four). An invalid timing function invalidates the whole `transition`
+  shorthand, so **every `--ease-out-soft` transition across the site had been snapping instantly** (the
+  primary button, the services/FAQ accordions, the process hover tick, etc.). Corrected to
+  `cubic-bezier(0.22, 1, 0.36, 1)` in globals.css, so those interactions now actually animate.
+- **Primary button retuned** to match the Beew reference (analyzed from the founder's screen recording,
+  frame-by-frame): the black fill is now a **constant-inset box that grows width-only** (height and
+  radius stay fixed) instead of also expanding its height/corners; the arrow is a **subtle settle**
+  (translateX 48% ≈ 20px) instead of the previous big 165% slide; and the timing is **~600ms** (fill
+  600ms, label 560ms, arrow 360ms) to match the reference's slower ease-out. Chip height raised to
+  ~44px (inset 5px) so the fill reads as width-only.
+- Verification: served CSS confirmed valid `transition: right 600ms cubic-bezier(0.22,1,0.36,1)`; hover
+  shows fill right 47→5px with constant top/bottom/left/radius, label swap, and the smaller arrow
+  settle. `npm run build` = 28 static pages, no errors.
+
+## Secondary button animation + rollout
+
+- **Secondary button variant added** (`Button variant="secondary"`), analyzed frame-by-frame from the
+  founder's Beew "Works" recording: a plain pill (no arrow/fill) whose **background lightens white→gray
+  on hover** and whose label does a **blurred vertical swap** — the current text blurs up and out while
+  a fresh copy blurs in from below (both dark). CSS in `.btn-secondary` (site.css); component renders
+  just the two label copies for this variant.
+- **Rolled out to every primary/secondary button:** primaries already use the `Button` component; the
+  secondary CTAs paired with them were converted — hero "Explore our work", 404 "Explore what we do",
+  and received "Message on WhatsApp". The **design reference** (`/_design`) now imports `Button` and its
+  hero + Actions specimens demonstrate the real primary + secondary interactions.
+  - Exception: the CTA band's WhatsApp action sits on the dark aurora, where a white→gray secondary
+    doesn't read; it keeps its existing dark ghost text-link. Flagged for a possible dark secondary.
+- Verification: `tsc` clean; `npm run build` = 28 static pages, no errors. The secondary hover end-state
+  was confirmed visually (bg darkens, label swaps). Note: `getComputedStyle` in the preview pane returns
+  stale values and synthetic `:hover` doesn't persist for reads, so hover was verified by injecting the
+  end-state and screenshotting rather than by reading computed styles.
+
+## Featured card: dot progress timers + CTA pill
+
+- **Dot progress indicators:** each dot in the hero featured carousel is now a track; the active dot is
+  wider and holds a white **progress fill that animates 0→100% over the 6s window**, showing how long
+  the current card stays and when it advances. The advance is driven by the fill's `animationend` (via
+  `onAnimationEnd`), so **hovering pauses the fill and the timer in perfect sync** (no more separate
+  interval that could drift). Reduced motion shows a static full bar and falls back to a plain interval.
+- **"Explore the project" restyled** into a glassy pill on the aurora card — translucent white bg, thin
+  border, backdrop blur, and a dark arrow chip that nudges right on hover.
+- Verification: `npm run build` = 28 static pages, no errors; live checks confirmed 3 dots (active 40px
+  vs 22px), the active fill mid-progress at ~74%, the fill-driven auto-advance, and the CTA pill
+  (radius 999px, translucent bg, 1px border).
+
+## Featured CTA (full-width glass), auto-hide nav, RPA service
+
+- **Featured card CTA** rebuilt to the Beew "Explore Design Club" reference (analyzed frame-by-frame):
+  a **full-width glassy button** (aurora shows through, thin light border, white text left + arrow
+  right). On hover it **fills solid white** while the label does an in-place **blur crossfade
+  white→dark** and the arrow turns dark and nudges right.
+- **Auto-hiding header:** `SiteHeader` now hides on scroll-down (past 120px) and reveals on scroll-up,
+  via a rAF-throttled direction check toggling `.site-header.is-hidden { transform: translateY(-100%) }`
+  (stays visible while the mobile menu is open). Confirmed the CSS hides the 88px header fully.
+- **RPA added as a service:** new "Robotic Process Automation (RPA)" row in the services accordion
+  (UI/desktop bots, legacy-portal automation, UiPath/Selenium, human-in-the-loop) grounded in the
+  healthcare-RCM case study; also added to the org-schema `knowsAbout` and the CTA ticker. Removed the
+  now-duplicated "RPA orchestration" chip from the Workflow-automation row.
+- Verification: `tsc` clean; `npm run build` = 28 static pages, no errors; live checks confirmed the
+  full-width glass CTA, 5 service rows incl. RPA, and the header hide transform. Note: the header
+  auto-hide relies on requestAnimationFrame, which the preview pane pauses when hidden, so it was
+  verified via the CSS toggle rather than a synthetic scroll.
+
+## Navbar "Let's talk" CTA + reveal type bump
+
+- **Navbar CTA:** replaced the "Contact" text link with a **"Let's talk"** button using the hero's
+  primary interaction in its **white variant** (`Button variant="light" className="nav-cta"`) — white
+  pill, dark arrow chip, black-fill + label-swap on hover. Added a hairline border so it stays defined
+  when the black fill lands on the dark header; drop-shadow removed; hidden ≤1199px (mobile menu keeps
+  its own Contact CTA).
+- **Reveal type:** bumped the "Think of us as…" lines up a little (`.sr-line` clamp min 26→30px,
+  `.sr-sub` 15→17px).
+- Verification: `tsc` clean; `npm run build` = 28 static pages, no errors; the white "Let's talk"
+  button confirmed in the navbar and the larger reveal minimums applied.
+
+## "Built to ship" card CTA → animated primary button
+
+- The hero "Built to ship" engagement card (now a dark image card, `built-to-ship.webp`) had a plain
+  arrow-chip CTA. Converted the card from a full `<Link>` to a `<div>` so a real interactive button can
+  live inside, and replaced the CTA with the primary `Button` in its **white variant**
+  (`variant="light"`, `.engagement-cta`) — full fill/label-swap/arrow-settle animation, with a hairline
+  border so it stays defined when the black fill lands on the dark card. Anchored bottom-left via
+  `.studio-engagement > .btn { margin-top:auto }`.
+- Verification: `tsc` clean; `npm run build` = 28 static pages, no errors; the CTA renders as
+  `btn btn-light engagement-cta` with fill + icon + dual label.
+
+## Highlighted Projects: full-screen stacking panels
+
+Refined the section from part-screen cards to **full-viewport panels**: the `works-stack` moved out of
+the container (content re-wrapped in `.container` per panel), each `.work-card` is `min-height: 100vh`,
+`sticky top: 0`, with **no border/radius/shadow** (no card chrome), and backgrounds **alternate white /
+light-grey (`#f3f3f1`)**. Each project fills the screen and the next scrolls up to fully cover it.
+Verified live: white SpecLens panel pinned while the grey Healthcare panel slides up over it with a
+clean edge. Build: 28 static pages, no errors.
+
+## Highlighted Projects: scroll-stacking cards (light palette)
+
+- Rebuilt the "Highlighted Projects" section as a **scroll-stacking deck** (`highlighted-projects.tsx`)
+  of the 5 featured case studies: each card is `position: sticky` at the **same top**, so the next card
+  scrolls up and **fully covers** the previous (matching the Beew reference), separated by rounded
+  corners + a soft top shadow + hairline border.
+- Corrected an earlier mistake: the cards had been recoloured to a uniform dark `#141414`. They now
+  keep the **original light palette** — white card surface, dark title/tags, the `#f1f1ef` category
+  badge, the blue `#3b5bff` result pill, dark "View case" (blue arrow). Per-project colour will come
+  from the real screenshots on the visual side once supplied.
+- Verification: `npm run build` = 28 static pages, no errors; live check confirmed 5 white cards all
+  sharing `top: 100px`, card 0 pinned while card 1 slides up to cover it (screenshot showed the light
+  cards stacking). Note: the preview pane ignores programmatic `scrollTo`, so stacking was verified
+  with a real wheel scroll + rect measurements.
 
 ## Revision 12: Beew signature motion references
 Studied beew.studio's own animations directly and added three specimens to the Motion section (05) as design reference, rebuilt in Apex Mind tokens rather than copied: (A) a focus-pull letter reveal — each character resolves from a blue blur into crisp white, left to right, triggered by an IntersectionObserver on scroll-in and re-armed when scrolled back below the viewport; (B) an aurora mesh panel — a slow strategic-blue radial-gradient drift echoing Beew's Design Club card, kept to blue only so it stays in the background; (C) a trust marquee — a continuous, low-speed logo ticker that pauses on hover, using placeholder client labels. All three degrade to a static, legible state under `prefers-reduced-motion` (letters shown crisp, gradient and marquee held still). No Beew assets, client names, or copy were used. Typecheck passed; computed-style check confirmed the reveal, drift, and marquee are live with no console errors.

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Arrow } from "./ui";
+import Button from "./button";
 
 type Service = {
   title: string;
@@ -35,8 +35,24 @@ const services: Service[] = [
     href: "/what-we-do/automate",
     hrefLabel: "Explore automate",
     colA: ["Process automation", "System integrations", "Data pipelines"],
-    colB: ["Email & agent workflows", "RPA orchestration", "Dashboards"],
+    colB: ["Email & agent workflows", "Approvals & routing", "Dashboards"],
     desc: "Start with the work your team repeats. We automate the steps, connect the applications, and keep a person in the loop where it matters.",
+  },
+  {
+    title: "Robotic Process Automation (RPA)",
+    href: "/what-we-do/automate",
+    hrefLabel: "Explore automate",
+    colA: [
+      "UI & desktop bots",
+      "Legacy-portal automation",
+      "Data entry & migration",
+    ],
+    colB: [
+      "UiPath orchestration",
+      "Selenium / browser bots",
+      "Human-in-the-loop",
+    ],
+    desc: "When a system has no API, we automate the clicks — bots that log in, extract, and enter data across legacy portals and desktop apps, with a person in the loop where judgment is needed.",
   },
   {
     title: "Web development & SEO",
@@ -44,7 +60,7 @@ const services: Service[] = [
     hrefLabel: "See the results",
     colA: ["Next.js builds", "Frontend rebuilds", "Performance"],
     colB: ["Technical SEO", "AI-SEO (GEO)", "Schema & sitemaps"],
-    desc: "High-performance sites built to ship and to be found — 100% PageSpeed, structured data, and AI-search readiness (llm.txt, schema).",
+    desc: "High-performance sites built to ship and to be found — 100% PageSpeed, structured data, and AI-search readiness.",
   },
 ];
 
@@ -70,21 +86,24 @@ export default function ServicesAccordion() {
               <div className="svc-body-inner">
                 <ul>
                   {s.colA.map((x) => (
-                    <li key={x}>{x}</li>
+                    <li key={x}>
+                      {s.href ? <Link href={s.href}>{x}</Link> : x}
+                    </li>
                   ))}
                 </ul>
                 <ul>
                   {s.colB.map((x) => (
-                    <li key={x}>{x}</li>
+                    <li key={x}>
+                      {s.href ? <Link href={s.href}>{x}</Link> : x}
+                    </li>
                   ))}
                 </ul>
                 <div className="svc-desc">
                   <p>{s.desc}</p>
                   {s.href && (
-                    <Link className="text-link" href={s.href}>
-                      <Arrow />
+                    <Button href={s.href} className="svc-cta">
                       {s.hrefLabel}
-                    </Link>
+                    </Button>
                   )}
                 </div>
               </div>

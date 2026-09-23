@@ -18,7 +18,7 @@
   --color-text-mono-label: #a80712;
   --color-selection-bg: rgb(226 27 35 / 0.24);
   --ease-standard: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-out-soft: cubic-bezier(0.22, 1, 0, 0.36, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-sharp: cubic-bezier(0.55, 0, 0.85, 0.35);
   --duration-micro: 180ms;
   --duration-standard: 320ms;

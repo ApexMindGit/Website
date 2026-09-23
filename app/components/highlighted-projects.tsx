@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { Arrow, ImageSlot } from "./ui";
-import { heroCaseStudies } from "./case-studies-data";
+import { ArrowRight } from "lucide-react";
+import { MediaSlot } from "./ui";
+import Button from "./button";
+import { featuredCaseStudies } from "./case-studies-data";
 
-/** "Works" section: centered header + alternating project showcases for the top
-    3 case studies (meta on one side, visual on the other). */
+/** "Works" section: centered header, then full-screen project panels that stack
+    one over the next as you scroll, alternating white / light-grey backgrounds. */
 export default function HighlightedProjects() {
   return (
     <section className="works-section">
@@ -19,41 +21,40 @@ export default function HighlightedProjects() {
             From AI automation to SaaS products and technical SEO, we help teams
             design, build, and ship software that moves the numbers.
           </p>
-          <Link className="button" href="/case-studies">
-            <Arrow />
-            All projects
-          </Link>
+          <Button href="/case-studies">All projects</Button>
         </div>
+      </div>
 
-        <div className="works-list">
-          {heroCaseStudies.map((study, i) => {
-            const hero = study.hero!;
-            return (
-              <article
-                key={study.slug}
-                className={`work-item${i % 2 ? " reverse" : ""}`}
-              >
-                <div className="work-meta">
-                  <div className="work-tags">
-                    <span className="work-client">{hero.name}</span>
+      <div className="works-stack">
+        {featuredCaseStudies.map((study, i) => {
+          const name = study.hero?.name ?? study.title;
+          const sub = (study.hero?.tagline ?? study.summary).replace(/\.$/, "");
+          return (
+            <Link
+              key={study.slug}
+              href={`/case-studies/${study.slug}`}
+              className="work-card"
+            >
+              <div className="container work-card-body">
+                <div className="work-card-meta">
+                  <div className="work-card-tags">
+                    <span className="work-client">{name}</span>
                     <span className="work-badge">{study.industry}</span>
                   </div>
-                  <h3 className="work-title">
-                    {hero.tagline.replace(/\.$/, "")}
-                  </h3>
+                  <h3 className="work-card-title">{sub}</h3>
                   <span className="work-pill">{study.result}</span>
-                  <Link className="button" href={`/case-studies/${study.slug}`}>
-                    <Arrow />
+                  <span className="work-card-cta">
+                    <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
                     View case
-                  </Link>
+                  </span>
                 </div>
-                <div className="work-visual">
-                  <ImageSlot label={hero.name} />
+                <div className="work-card-visual">
+                  <MediaSlot label={name} media={study.media} />
                 </div>
-              </article>
-            );
-          })}
-        </div>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

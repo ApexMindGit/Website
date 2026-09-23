@@ -15,6 +15,9 @@ export type CaseStudy = {
   featured: boolean; // shown in the homepage carousel
   // Concise copy for the rotating hero featured card (top 3 only).
   hero?: { name: string; tagline: string; value: string; label: string };
+  // Optional looping demo video (served from /public). Falls back to the
+  // labeled ImageSlot placeholder when absent.
+  media?: { src: string; poster?: string };
   externalUrl?: { href: string; label: string };
   problem: string[];
   approach: { title: string; body: string }[];
@@ -32,13 +35,17 @@ export const caseStudies: CaseStudy[] = [
     timeline: "8 weeks to MVP",
     summary:
       "A full-stack procurement SaaS that reads vendor documents and produces structured specification comparisons with citations back to source pages.",
-    result: "Live · 300+ signed-up users",
+    result: "Live · 300+ signed-up users in first month",
     featured: true,
     hero: {
       name: "SpecLens",
       tagline: "AI-powered procurement specification comparison.",
       value: "300+",
-      label: "signed-up users",
+      label: "signed-up users in first month",
+    },
+    media: {
+      src: "/SpecLens%20comparision%20matrix.mp4",
+      poster: "/SpecLens%20hero%20Screenshot.png",
     },
     externalUrl: { href: "https://speclens.ai", label: "Visit speclens.ai" },
     problem: [
@@ -64,7 +71,7 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     results: [
-      { value: "300+", label: "Signed-up users" },
+      { value: "300+", label: "Signed-up users in the first month" },
       { value: "8 weeks", label: "Idea to working MVP" },
       { value: "5", label: "Document formats supported" },
     ],
@@ -138,6 +145,9 @@ export const caseStudies: CaseStudy[] = [
       tagline: "Frontend rebuild and technical AI-SEO at scale.",
       value: "1M+",
       label: "daily search impressions",
+    },
+    media: {
+      src: "/combinehealth-ai-scroll.mp4",
     },
     problem: [
       "The old website was incomplete, lacking product sections and crucial pages requested by the design and marketing teams. PageSpeed Insights scores were languishing around 20–30%, severely restricting organic visibility.",
@@ -302,10 +312,27 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export const featuredCaseStudies = caseStudies.filter((c) => c.featured);
+// Display order for the homepage: CombineHealth leads, then the rest keep
+// their source order.
+const LEAD_SLUG = "combinehealth-seo-redesign";
+const leadFirst = (a: CaseStudy, b: CaseStudy) =>
+  (a.slug === LEAD_SLUG ? -1 : 0) - (b.slug === LEAD_SLUG ? -1 : 0);
 
-// Top 3 for the rotating hero featured card (those with concise hero copy).
-export const heroCaseStudies = caseStudies.filter((c) => c.hero);
+// Kept in the /case-studies index and their own pages, but hidden from the
+// homepage sections (Highlighted Projects + hero carousel).
+const HIDE_FROM_HOME = new Set([
+  "seo-internal-linking-ai-agent",
+  "autonomous-inbound-email-agent",
+]);
+
+export const featuredCaseStudies = caseStudies
+  .filter((c) => c.featured && !HIDE_FROM_HOME.has(c.slug))
+  .sort(leadFirst);
+
+// Rotating hero featured card (those with concise hero copy), CombineHealth first.
+export const heroCaseStudies = caseStudies
+  .filter((c) => c.hero && !HIDE_FROM_HOME.has(c.slug))
+  .sort(leadFirst);
 
 export function getCaseStudy(slug: string) {
   return caseStudies.find((c) => c.slug === slug);
