@@ -4,13 +4,13 @@ import CapabilityPage, {
 } from "../../../components/capability-page";
 
 export const metadata: Metadata = {
-  title: "Build — software development",
+  title: "Software development",
   description:
-    "Discuss software development with Apex Mind, from a first product version to mobile applications, integrations, modernization, and existing software.",
+    "Discuss software development with Apex Mind, from a first product version to web apps, SaaS products, internal tools, integrations, modernization, and existing software.",
 };
 
 const data: CapabilityData = {
-  eyebrow: "What we do / Build",
+  eyebrow: "What we do / Software development",
   title: (
     <>
       Software that
@@ -19,11 +19,11 @@ const data: CapabilityData = {
     </>
   ),
   intro:
-    "Start with the problem the software needs to solve — a first product, a mobile app, or an existing application that needs attention.",
+    "Start with the problem the software needs to solve — a first product, an internal tool, or an existing application that needs attention. We turn that into something your team can ship.",
   paragraphs: [
-    "You might be planning a first product, developing a mobile app, or working with an existing application that needs attention. Apex Mind provides software development, integrations, modernization, optimization, and maintenance. The starting point is understanding what you need the software to do.",
-    "For a new product, useful questions include who will use it, what task matters most, and what belongs in the first version. For an existing system, the discussion starts with what works today and what needs to change. These questions help make the requirement concrete before choosing a technical direction.",
-    "SpecLens provides one example: its first version accepted uploaded documents and produced a comparison matrix. Share your starting point through the inquiry form, including any existing system and the problem you want to address.",
+    "You might be planning a first product, standing up an internal tool, or wrestling with an application that no longer fits. Apex Mind covers the full arc — development, integrations, modernization, optimization, and maintenance — and starts by getting clear on what the software actually has to do.",
+    "For something new, the useful questions are who uses it, which task matters most, and what belongs in the first version. For an existing system, we start from what works today and what has to change. Either way, the requirement gets concrete before a single technical decision is made.",
+    "SpecLens is one example: its first version accepted uploaded documents and produced a comparison matrix — shipped, then extended. Bring your starting point through the inquiry form, including any existing system and the problem you want to move.",
   ],
   bring: [
     {
@@ -45,6 +45,8 @@ const data: CapabilityData = {
   related: [
     { href: "/what-we-do/intelligence", label: "Intelligence" },
     { href: "/what-we-do/automate", label: "Automate" },
+    { href: "/what-we-do/rpa", label: "RPA" },
+    { href: "/what-we-do/web-seo", label: "Web & SEO" },
   ],
   ctaTitle: (
     <>

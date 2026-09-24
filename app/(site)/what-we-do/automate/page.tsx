@@ -43,7 +43,7 @@ const data: CapabilityData = {
     },
   ],
   related: [
-    { href: "/what-we-do/build", label: "Build" },
+    { href: "/what-we-do/build", label: "Software development" },
     { href: "/what-we-do/intelligence", label: "Intelligence" },
   ],
   ctaTitle: (

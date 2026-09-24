@@ -26,8 +26,8 @@ export const credentials = [
 export const capabilityChildren: NavChild[] = [
   {
     href: "/what-we-do/build",
-    label: "Build",
-    description: "Software development, mobile apps, and modernization.",
+    label: "Software development",
+    description: "Web apps, SaaS products, internal tools, and modernization.",
   },
   {
     href: "/what-we-do/intelligence",

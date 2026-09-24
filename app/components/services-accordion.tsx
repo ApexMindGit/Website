@@ -17,10 +17,10 @@ const services: Service[] = [
   {
     title: "Software development",
     href: "/what-we-do/build",
-    hrefLabel: "Explore build",
-    colA: ["Web applications", "SaaS products", "Mobile apps"],
-    colB: ["Internal tools", "Integrations", "Modernization"],
-    desc: "From early ideas to complex platforms, we build software around a defined problem — web and mobile apps, SaaS products, and internal tools — plus work on the systems you already run.",
+    hrefLabel: "Explore software development",
+    colA: ["Web applications", "SaaS products", "Internal tools"],
+    colB: ["Integrations", "Modernization", "Maintenance & support"],
+    desc: "Web apps, SaaS products, and internal tools — built around a defined problem and shipped in reviewable slices. We also modernize and extend the systems you already run.",
   },
   {
     title: "AI integration & agentic workflows",
