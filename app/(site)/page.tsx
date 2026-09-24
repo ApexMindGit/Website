@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { Mail, MessageCircle } from "lucide-react";
 import { Arrow, CTABand } from "../components/ui";
 import Button from "../components/button";
 import { CONTACT } from "../components/nav-data";
@@ -7,6 +9,12 @@ import FeaturedCarousel from "../components/featured-carousel";
 import ScrollReveal from "../components/scroll-reveal";
 import ServicesAccordion from "../components/services-accordion";
 import FaqAccordion from "../components/faq-accordion";
+
+export const metadata: Metadata = {
+  description:
+    "Founder-led software, AI & automation consultancy in Lucknow, India — custom software and MVPs, applied AI (document AI, agents, RAG), workflow automation, and RPA for startups and public-sector teams.",
+  alternates: { canonical: "/" },
+};
 
 // Provisional homepage copy (copy-drafts.md). Final wording pending review.
 const processes = [
@@ -35,24 +43,32 @@ const processes = [
 // Single source for the FAQ section and the FAQPage structured data.
 const faqs = [
   [
-    "What happens after I send an inquiry?",
-    "We review the problem, reply within one working day, and suggest a clear next step.",
+    "How much does it cost to build an MVP or custom software?",
+    "It depends on scope, but MVPs typically run $15k–$150k over 8–18 weeks industry-wide. As a Lucknow, India–based team, we deliver comparable quality at lower cost than US/EU agencies, and scope fixed-price or retainer work to your budget. We share a quote once the requirement is clear.",
+  ],
+  [
+    "How long does it take to build a SaaS MVP?",
+    "Usually 8–18 weeks, depending on complexity. We ship in reviewable slices and aim for a usable first version early — SpecLens went from idea to a working MVP in 8 weeks.",
+  ],
+  [
+    "Can you automate a workflow or system that has no API?",
+    "Yes — that is what RPA is for. Software bots operate the interface like a person: logging into legacy portals, reading screens, and moving data between systems. It suits legacy software, invoice processing, and data entry, with a person kept in the loop for exceptions.",
+  ],
+  [
+    "How do you add AI to an existing product or workflow?",
+    "We start with one high-value task — document processing, an autonomous agent, or retrieval (RAG) — prototype it quickly, and verify it helps before scaling. AI is wired into your real workflow with clear inputs, confidence scoring, and human review, so the output can be trusted.",
   ],
   [
     "Do you work with startups and government teams?",
-    "Yes. We work with startup founders and public-sector and procurement teams. Apex Mind is a registered LLP based in Lucknow, India.",
+    "Yes. We work with startup founders, growing companies, and public-sector and procurement teams. Apex Mind is a registered LLP in Lucknow, India, serving clients across India and globally.",
   ],
   [
-    "Do you offer fixed-scope projects or retainers?",
-    "Both. Fixed-scope projects come with agreed deliverables, price, and milestone payments; monthly retainers cover ongoing work and support for an agreed amount each month.",
+    "Do I need a technical specification to start?",
+    "No. Bring the problem in plain language — turning it into a clear requirement is part of the work.",
   ],
   [
-    "Do I need a specification before contacting you?",
-    "No. You can bring the problem first — defining the requirement is part of the work.",
-  ],
-  [
-    "Where are you based, and do you work remotely?",
-    "We are based in Lucknow, India, and work with clients across India and globally.",
+    "What happens after I send an inquiry?",
+    "We reply within one working day with a clear next step — usually a short call or a scoped proposal.",
   ],
 ] as const;
 
@@ -85,14 +101,67 @@ const orgSchema = {
     telephone: "+918052799799",
     availableLanguage: ["English", "Hindi"],
   },
+  slogan: "Your senior software team, without the headcount.",
   knowsAbout: [
     "Software development",
-    "AI consulting and implementation",
+    "MVP development",
+    "SaaS development",
+    "Applied AI",
+    "Document AI",
+    "AI agents and agentic workflows",
+    "Retrieval-Augmented Generation (RAG)",
     "Workflow automation",
-    "Robotic Process Automation",
+    "Robotic Process Automation (RPA)",
     "System integrations",
+    "Web development and technical SEO",
     "Government software",
   ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Software development",
+          url: "https://apexminds.in/what-we-do/build",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Applied AI",
+          url: "https://apexminds.in/what-we-do/intelligence",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Workflow automation",
+          url: "https://apexminds.in/what-we-do/automate",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Robotic Process Automation (RPA)",
+          url: "https://apexminds.in/what-we-do/rpa",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Web development & SEO",
+          url: "https://apexminds.in/what-we-do/web-seo",
+        },
+      },
+    ],
+  },
 };
 
 const faqSchema = {
@@ -251,10 +320,30 @@ export default function Home() {
               Questions
             </h2>
             <p>
-              Everything you need to know about working with Apex Mind — from
-              engagement models and process to where we work and how we start.
+              Straight answers on cost, timelines, and how we work — building
+              software, applying AI, and automating workflows for startups and
+              public-sector teams.
             </p>
-            <Button href="/how-we-work">More on how we work</Button>
+            <div className="faq-contact">
+              <span className="faq-contact-title">
+                Have a different question?
+              </span>
+              <div className="faq-contact-chips">
+                <a className="faq-chip" href={`mailto:${CONTACT.email}`}>
+                  <Mail size={15} strokeWidth={1.75} aria-hidden="true" />
+                  {CONTACT.email}
+                </a>
+                <a
+                  className="faq-chip"
+                  href={CONTACT.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle size={15} strokeWidth={1.75} aria-hidden="true" />
+                  WhatsApp
+                </a>
+              </div>
+            </div>
           </div>
           <FaqAccordion items={faqs} />
         </div>

@@ -21,7 +21,8 @@ orientation.
 - **Buttons:** always reuse `app/components/button.tsx` (`default` / `light` /
   `secondary`). Don't hand-roll CTAs.
 - **Copy is provisional.** No fabricated metrics/logos/testimonials beyond
-  what's authorized. `robots: { index: false }` stays until launch.
+  what's authorized. Note: the site is now **indexable** (`robots: index`), so
+  provisional copy and draft legal pages are publicly crawlable — verify before relying.
 
 ## Commands
 ```bash

@@ -6,13 +6,13 @@ import { capabilityChildren } from "../../components/nav-data";
 export const metadata: Metadata = {
   title: "What we do",
   description:
-    "Explore Apex Mind's software development, AI consulting, and workflow automation capabilities, plus integrations, modernization, and mobile applications.",
+    "Explore Apex Mind's capabilities: software development, applied AI, workflow automation, robotic process automation (RPA), and web development & SEO.",
 };
 
 const related = [
   ["System integrations", "Connect the applications you already use into a shared workflow."],
   ["Modernization", "Improve or replace software that no longer fits current requirements."],
-  ["Mobile applications", "Build a mobile product around a defined user need."],
+  ["Data migration & entry", "Move records between systems accurately, without manual re-keying."],
   ["Maintenance & support", "Keep an existing application working through ongoing changes."],
 ];
 
@@ -28,7 +28,7 @@ export default function WhatWeDo() {
             work between them.
           </>
         }
-        intro="Three primary capabilities, one starting point: the problem you are trying to solve. Bring it before you have a specification."
+        intro="Five ways we help, one starting point: the problem you are trying to solve. Bring it before you have a specification."
         meta={
           <div>
             <span className="mono-label">Apex Mind / Lucknow</span>

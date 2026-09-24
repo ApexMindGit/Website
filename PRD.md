@@ -48,6 +48,17 @@ Key tokens/eases live in `globals.css` (`--ease-standard`, `--ease-out-soft`,
 `--ease-in-sharp`). Note: `--ease-out-soft` must be a valid 4-number
 `cubic-bezier` — a malformed value silently kills every transition using it.
 
+### Theming: dark homepage, light inner pages
+The **homepage keeps the dark studio canvas**; **every other route renders on a
+light/white theme**. A route-aware `ThemeShell` (`app/components/theme-shell.tsx`)
+wraps header + main + footer and sets `data-theme` (`dark` on `/`, `light`
+elsewhere; `usePathname` resolves during SSR, so no flash). Light overrides live
+at the **end of `site.css`** under `.theme-shell[data-theme="light"]`, plus a
+`body:has(...)` rule to flip the canvas. The **footer stays dark on every page**.
+The nav logo and CTA switch on `isHome` in `site-nav.tsx` (dark artwork +
+`default` pill on light; inverted artwork + `light` pill on the dark home).
+The blue accent (`#39c8ff`, exposed via `--color-apex-red`) is kept on white.
+
 ## 3. Audience & goals
 
 | Audience | What they need | Where the site serves them |
@@ -67,10 +78,12 @@ untouched.
 
 ```
 /                          Homepage
-/what-we-do                Capabilities hub
+/what-we-do                Capabilities hub (5 capabilities)
 /what-we-do/build          Software development
-/what-we-do/intelligence   AI integration & agentic workflows
-/what-we-do/automate       Workflow automation + RPA
+/what-we-do/intelligence   Applied AI (document AI, agents, RAG)
+/what-we-do/automate       Workflow automation & integrations
+/what-we-do/rpa            Robotic Process Automation
+/what-we-do/web-seo        Web development & SEO
 /solutions                 Problem-led entry points
 /how-we-work               Process + engagement models + FAQ
 /case-studies              Index of all case studies
@@ -84,8 +97,9 @@ untouched.
 not-found                  On-brand 404
 ```
 
-`robots: { index: false }` is set site-wide — this is an **unpublished
-preview**. Remove before launch.
+`robots: { index: true, follow: true }` is now set site-wide — the site is
+**indexable** by search engines and AI crawlers. Copy is still provisional and
+the legal pages are drafts, so treat public content accordingly.
 
 ## 5. Homepage anatomy (top → bottom)
 
@@ -149,18 +163,33 @@ Shared components in `app/components/`:
   scroll-up. CTA = "Let's talk" (`light` variant).
 - `site-footer.tsx` — footer with credential chips + giant faded "apex mind"
   brandmark.
+- `theme-shell.tsx` — route-aware light/dark wrapper (see §2 Theming).
+- `capability-page.tsx` — **beew-services layout** for the 5 capability pages:
+  aurora hero panel (dual CTA + proof badge), 4-up icon feature row, optional
+  "Selected work" strip (real case studies only — never fabricated logos), deep
+  content (prose + aside + "what helps us start"), capability FAQ, closing CTA.
+  Data shape: `{ eyebrow, title, intro, heroNote?, features?, paragraphs, bring,
+  faqs?, cases?, related?, ctaTitle, ctaBody? }` (`features`/`faqs`/`cases`
+  optional). Feature icons are `lucide-react` components.
 - `services-accordion.tsx`, `faq-accordion.tsx`, `featured-carousel.tsx`,
-  `highlighted-projects.tsx`, `scroll-reveal.tsx`, `capability-page.tsx`,
+  `highlighted-projects.tsx`, `scroll-reveal.tsx`,
   `inquiry-form.tsx`, `whatsapp-float.tsx`, `nav-data.ts`.
 
 ### Services accordion → destinations
+Each accordion subheading now has its **own dedicated capability page** (5 total).
 | Service | Button → page |
 |---|---|
 | Software development | `/what-we-do/build` |
-| AI integration & agentic workflows | `/what-we-do/intelligence` |
+| Applied AI | `/what-we-do/intelligence` |
 | Workflow automation | `/what-we-do/automate` |
-| Robotic Process Automation (RPA) | `/what-we-do/automate` (no separate RPA page) |
-| Web development & SEO | `/case-studies` |
+| Robotic Process Automation (RPA) | `/what-we-do/rpa` |
+| Web development & SEO | `/what-we-do/web-seo` |
+
+Capability names are the single source in `nav-data.ts` (`capabilityChildren`),
+which feeds the navbar dropdown, the footer, and the `/what-we-do` hub cards.
+Note: the `/what-we-do/intelligence` route keeps its slug but is branded
+**"Applied AI"**; the accordion label lives in `services-accordion.tsx`. We do
+**not** build mobile apps — don't reintroduce that claim.
 
 ## 8. Tech stack & commands
 
@@ -191,7 +220,8 @@ route ships to production.
 - **beew.studio** = reference only; never copy its assets/claims.
 - No fabricated metrics, testimonials, prices, or client logos beyond what the
   founder has authorized.
-- Keep `robots: { index: false }` until launch.
+- `robots` is now `index: true` (site is indexable) — keep copy accurate since
+  it is publicly crawlable.
 - All new motion must respect `prefers-reduced-motion`.
 - Must build clean: `pnpm typecheck`, `pnpm lint`, `pnpm build` all pass.
 - No horizontal overflow at 375px.
@@ -205,7 +235,8 @@ route ships to production.
 
 ## 11. Status
 
-The full site is built (all routes render, build passes). Outstanding before
-launch: founder copy sign-off, backend for the contact form (email/Sheets +
-anti-spam), analytics, final SEO/security headers, and flipping `robots` to
-indexable. Nothing has been published.
+The full site is built (all routes render, build passes) and `robots` is now
+set to **indexable**. Outstanding before/at launch: founder copy sign-off,
+backend for the contact form (email/Sheets + anti-spam), analytics, final
+SEO/security headers, and a purpose-made 1200×630 OG share image (currently a
+`/icon.png` stopgap).

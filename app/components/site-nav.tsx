@@ -14,6 +14,7 @@ function isActive(pathname: string, href: string) {
 
 export default function SiteHeader() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [hidden, setHidden] = useState(false);
@@ -75,7 +76,10 @@ export default function SiteHeader() {
     <header className={`site-header${hidden ? " is-hidden" : ""}`}>
       <div className="container nav-inner">
         <Link className="wordmark" href="/" aria-label="Apex Mind, home">
-          <span className="logo-mark logo-mark-on-dark" aria-hidden="true">
+          <span
+            className={`logo-mark ${isHome ? "logo-mark-on-dark" : "logo-mark-on-light"}`}
+            aria-hidden="true"
+          >
             <img src="/brand/apex-mind-mark.png" alt="" />
           </span>
           <span>
@@ -126,7 +130,11 @@ export default function SiteHeader() {
           )}
         </nav>
 
-        <Button href="/contact" variant="light" className="nav-cta">
+        <Button
+          href="/contact"
+          variant={isHome ? "light" : "default"}
+          className="nav-cta"
+        >
           Let&rsquo;s talk
         </Button>
 

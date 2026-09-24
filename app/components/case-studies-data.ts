@@ -30,11 +30,11 @@ export const caseStudies: CaseStudy[] = [
     slug: "speclens",
     title: "SpecLens AI — Procurement SaaS",
     industry: "B2B / Procurement",
-    services: ["SaaS Development", "AI Integration & Agentic Workflows"],
+    services: ["SaaS Development", "Applied AI"],
     client: "SpecLens AI (own product)",
     timeline: "8 weeks to MVP",
     summary:
-      "A full-stack procurement SaaS that reads vendor documents and produces structured specification comparisons with citations back to source pages.",
+      "Reads vendor documents and turns them into a structured comparison matrix — with citations back to the source pages.",
     result: "Live · 300+ signed-up users in first month",
     featured: true,
     hero: {
@@ -82,17 +82,21 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "healthcare-rcm-automation",
+    media: {
+      src: "/healthcare-rcm-architecture.mp4",
+      poster: "/healthcare-rcm-architecture-poster.png",
+    },
     title: "Healthcare Insurance Verification & RCM Automation",
     industry: "Healthcare / RCM",
-    services: ["AI Integration & Agentic Workflows"],
+    services: ["Applied AI"],
     client: "Healthcare Billing & RCM Company (US/India)",
     timeline: "4 weeks",
     summary:
-      "A custom AI-driven pipeline integrating with eClinicalWorks to automate insurance verification for a US billing company.",
+      "A custom AI pipeline integrated with eClinicalWorks that automates insurance verification end to end — logging into payer portals, extracting coverage, and writing results back.",
     result: "300 patients/day · replaced 7 FTEs",
     featured: true,
     hero: {
-      name: "Healthcare RCM Automation",
+      name: "Healthcare RCM",
       tagline: "AI insurance-verification agent for a US billing company.",
       value: "7 FTEs",
       label: "reassigned · 300+ patients/day",
@@ -141,7 +145,7 @@ export const caseStudies: CaseStudy[] = [
     result: "1M+ daily impressions · 100% PageSpeed",
     featured: true,
     hero: {
-      name: "CombineHealth SEO",
+      name: "CombineHealth",
       tagline: "Frontend rebuild and technical AI-SEO at scale.",
       value: "1M+",
       label: "daily search impressions",
@@ -185,7 +189,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "seo-internal-linking-ai-agent",
     title: "AI SEO Agent: Internal Linking & Backlink Graph",
     industry: "Internal Tool / SEO",
-    services: ["AI Integration & Agentic Workflows", "SEO Services"],
+    services: ["Applied AI", "SEO Services"],
     client: "Internal Tool",
     timeline: "4 weeks",
     summary:
@@ -228,7 +232,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "autonomous-inbound-email-agent",
     title: "Autonomous Inbound Sales & Scheduling Agent",
     industry: "HealthTech",
-    services: ["AI Integration & Agentic Workflows"],
+    services: ["Applied AI"],
     client: "HealthTech Company (Confidential)",
     timeline: "3 weeks",
     summary:
@@ -271,7 +275,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "photoshoprequest-ai-editor",
     title: "AI-Powered Photo Editor Pipeline",
     industry: "Consumer / AI SaaS",
-    services: ["SaaS Development", "AI Integration & Agentic Workflows"],
+    services: ["SaaS Development", "Applied AI"],
     client: "PhotoshopRequest (own product)",
     timeline: "Beta live",
     summary:

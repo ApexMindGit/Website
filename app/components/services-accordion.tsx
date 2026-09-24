@@ -23,12 +23,12 @@ const services: Service[] = [
     desc: "Web apps, SaaS products, and internal tools — built around a defined problem and shipped in reviewable slices. We also modernize and extend the systems you already run.",
   },
   {
-    title: "AI integration & agentic workflows",
+    title: "Applied AI",
     href: "/what-we-do/intelligence",
-    hrefLabel: "Explore intelligence",
+    hrefLabel: "Explore Applied AI",
     colA: ["Document AI", "Agentic workflows", "RAG systems"],
     colB: ["LLM integration", "Extraction & parsing", "Confidence scoring"],
-    desc: "We connect AI to a practical task — document processing, autonomous agents, and retrieval systems — with clear inputs, a defined job, and output someone can trust.",
+    desc: "AI wired to a real task — document processing, autonomous agents, and retrieval — with clear inputs, a defined job, and output someone can trust.",
   },
   {
     title: "Workflow automation",
@@ -40,8 +40,8 @@ const services: Service[] = [
   },
   {
     title: "Robotic Process Automation (RPA)",
-    href: "/what-we-do/automate",
-    hrefLabel: "Explore automate",
+    href: "/what-we-do/rpa",
+    hrefLabel: "Explore RPA",
     colA: [
       "UI & desktop bots",
       "Legacy-portal automation",
@@ -56,8 +56,8 @@ const services: Service[] = [
   },
   {
     title: "Web development & SEO",
-    href: "/case-studies",
-    hrefLabel: "See the results",
+    href: "/what-we-do/web-seo",
+    hrefLabel: "Explore Web & SEO",
     colA: ["Next.js builds", "Frontend rebuilds", "Performance"],
     colB: ["Technical SEO", "AI-SEO (GEO)", "Schema & sitemaps"],
     desc: "High-performance sites built to ship and to be found — 100% PageSpeed, structured data, and AI-search readiness.",

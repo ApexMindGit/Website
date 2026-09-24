@@ -1116,6 +1116,26 @@ a.feature-card:hover {
   color: #111;
   max-width: 16ch;
 }
+.work-card-desc {
+  font-size: 16px;
+  line-height: 1.55;
+  color: #555;
+  max-width: 42ch;
+}
+.work-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.work-service-tag {
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.03em;
+  color: #444;
+  background: #fff;
+  border: 1px solid #e2e2de;
+  border-radius: 999px;
+  padding: 8px 13px;
+}
 .work-pill {
   display: inline-block;
   font-size: 14px;
@@ -2328,7 +2348,47 @@ a.feature-card:hover {
 }
 
 .faq-intro .eyebrow {
-  color: #999;
+  color: #3b5bff;
+}
+
+/* "Have a different question?" contact card (beew FAQ layout). */
+.faq-contact {
+  margin-top: 36px;
+  padding: 22px;
+  border-radius: 14px;
+  background: #f4f4f2;
+  border: 1px solid #e6e6e2;
+  display: grid;
+  gap: 14px;
+}
+.faq-contact-title {
+  font-size: 15px;
+  color: #555;
+}
+.faq-contact-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.faq-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #e2e2de;
+  border-radius: 999px;
+  padding: 8px 12px;
+  transition: border-color 160ms var(--ease-standard),
+    transform 160ms var(--ease-standard);
+}
+.faq-chip:hover {
+  border-color: #b9b9b3;
+  transform: translateY(-1px);
+}
+.faq-chip svg {
+  color: #666;
 }
 
 .faq-intro h2 {
@@ -2446,13 +2506,15 @@ a.feature-card:hover {
   }
 
   .faq-layout {
-    grid-template-columns: 1fr;
+    /* minmax(0,…) lets the column shrink below the intro paragraph's max-width,
+       preventing a grid blowout / horizontal overflow on narrow screens. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
 
-  .faq-intro h2 br {
-    display: none;
-  }
+  /* Keep the <br>s: they are the heading's only line-break opportunities (the
+     words have no spaces between them), so hiding them forced one unbreakable
+     line that overflowed at narrow widths. */
 
   .process-band-inner {
     grid-template-columns: 1fr;
@@ -2581,5 +2643,255 @@ a.feature-card:hover {
 
   .process-grid h3 {
     margin-top: 20px;
+  }
+}
+
+/* ===========================================================================
+   LIGHT THEME — every route except the homepage.
+   The homepage keeps the dark studio canvas (data-theme="dark"); inner pages
+   render on white. Inner content panels are already light, so this mainly flips
+   the body canvas and the navigation. The footer intentionally stays dark.
+   =========================================================================== */
+.theme-shell[data-theme="light"] {
+  background: #fff;
+}
+/* Flip the body canvas so overscroll / short pages never reveal the dark body. */
+body:has(.theme-shell[data-theme="light"]) {
+  background: #fff;
+}
+
+/* --- Light navigation ------------------------------------------------------ */
+.theme-shell[data-theme="light"] .site-header {
+  background: rgb(255 255 255 / 0.86);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #ececec;
+  color: #111;
+}
+.theme-shell[data-theme="light"] .wordmark,
+.theme-shell[data-theme="light"] .wordmark-dot {
+  color: #111;
+}
+.theme-shell[data-theme="light"] .wordmark-dot {
+  color: var(--color-apex-red);
+}
+/* Artwork is natively dark; the dark theme inverts it. On white, use it as-is. */
+.theme-shell[data-theme="light"] .logo-mark-on-light img {
+  filter: none;
+}
+.theme-shell[data-theme="light"] .desktop-nav a,
+.theme-shell[data-theme="light"] .nav-dropdown-trigger {
+  color: #555;
+}
+.theme-shell[data-theme="light"] .desktop-nav a[aria-current],
+.theme-shell[data-theme="light"] .desktop-nav a:hover,
+.theme-shell[data-theme="light"] .nav-dropdown-trigger:hover {
+  color: #111;
+}
+.theme-shell[data-theme="light"] .menu-toggle {
+  color: #111;
+}
+.theme-shell[data-theme="light"] .nav-cta {
+  border: 1px solid rgb(0 0 0 / 0.1);
+}
+
+/* Light dropdown panel */
+.theme-shell[data-theme="light"] .nav-dropdown-panel {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.12);
+}
+.theme-shell[data-theme="light"] .nav-dropdown-panel a:hover {
+  background: #f4f4f2;
+}
+.theme-shell[data-theme="light"] .nav-dropdown-panel a > span:first-child {
+  color: #111;
+}
+.theme-shell[data-theme="light"] .nav-dropdown-panel a > span:last-child {
+  color: #777;
+}
+
+/* ===========================================================================
+   CAPABILITY PAGES — beew-style services layout (hero panel, feature row,
+   selected work, FAQ). Rendered on the light theme.
+   =========================================================================== */
+.cap-hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.5fr 0.6fr;
+  gap: 48px;
+  align-items: end;
+  border-radius: 20px;
+  margin: 12px auto 0;
+  padding: clamp(52px, 6.5vw, 92px) clamp(28px, 4vw, 56px);
+  background: radial-gradient(
+    130% 130% at 88% 12%,
+    #eef1f6 0%,
+    #f5f6f9 42%,
+    #fbfbfc 100%
+  );
+  border: 1px solid #ececec;
+}
+/* Soft blue-grey aurora glow, top-right — beew-style, using the brand accent. */
+.cap-hero::before {
+  content: "";
+  position: absolute;
+  top: -34%;
+  right: -8%;
+  width: 58%;
+  height: 130%;
+  background: radial-gradient(
+    closest-side,
+    rgb(57 200 255 / 0.22),
+    transparent 70%
+  );
+  filter: blur(28px);
+  pointer-events: none;
+}
+.cap-hero-main {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.cap-hero-main .eyebrow {
+  color: #777;
+}
+.cap-hero-main h1 {
+  margin: 20px 0;
+  letter-spacing: -0.05em;
+}
+.cap-hero-intro {
+  color: #555;
+  font-size: 19px;
+  line-height: 1.6;
+  max-width: 560px;
+}
+.cap-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+}
+/* Secondary button needs a hairline to read on the light panel. */
+.cap-hero-actions .btn-secondary {
+  border: 1px solid rgb(0 0 0 / 0.14);
+}
+.cap-hero-badge {
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.66);
+  backdrop-filter: blur(8px);
+  border: 1px solid #e6e6e6;
+}
+.cap-hero-badge p {
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  line-height: 1.32;
+  color: #111;
+}
+.cap-hero-badge-foot {
+  color: #8a8a8a;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Feature row */
+.cap-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 8px;
+}
+.cap-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cap-feature-icon {
+  display: inline-flex;
+  color: #111;
+}
+.cap-feature h3 {
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+.cap-feature p {
+  color: #666;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* Selected work */
+.cap-work {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+.cap-work-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  border-radius: 12px;
+  background: #f4f4f2;
+  border: 1px solid #e4e4e0;
+  transition: transform 220ms var(--ease-standard),
+    background 220ms var(--ease-standard);
+}
+a.cap-work-item:hover {
+  transform: translateY(-3px);
+  background: #eeeeea;
+}
+.cap-work-text {
+  display: grid;
+  gap: 4px;
+}
+.cap-work-item .mono-label {
+  color: #8a8a8a;
+}
+.cap-work-label {
+  font-size: 16.5px;
+  letter-spacing: -0.02em;
+  color: #111;
+  line-height: 1.3;
+}
+.cap-work-item svg {
+  color: var(--color-apex-red);
+  flex: 0 0 auto;
+}
+
+@media (max-width: 960px) {
+  .cap-hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+  .cap-features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .cap-work {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .cap-features {
+    grid-template-columns: 1fr;
+  }
+  .cap-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cap-hero-actions .btn {
+    width: 100%;
+    justify-content: flex-start;
   }
 }

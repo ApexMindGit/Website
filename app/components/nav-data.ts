@@ -31,13 +31,23 @@ export const capabilityChildren: NavChild[] = [
   },
   {
     href: "/what-we-do/intelligence",
-    label: "Intelligence",
-    description: "AI consulting and implementation for practical tasks.",
+    label: "Applied AI",
+    description: "Document AI, agents, and retrieval built for practical tasks.",
   },
   {
     href: "/what-we-do/automate",
     label: "Automate",
     description: "Workflow automation and system integrations.",
+  },
+  {
+    href: "/what-we-do/rpa",
+    label: "RPA",
+    description: "Bots for systems with no API — legacy portals and desktop apps.",
+  },
+  {
+    href: "/what-we-do/web-seo",
+    label: "Web & SEO",
+    description: "High-performance sites, technical SEO, and AI-search readiness.",
   },
 ];
 
@@ -47,7 +57,6 @@ export const primaryNav: NavItem[] = [
   { href: "/how-we-work", label: "How we work" },
   { href: "/case-studies", label: "Case studies" },
   { href: "/about", label: "About" },
-  { href: "/government", label: "Government" },
 ];
 
 export const footerColumns: { title: string; links: NavChild[] }[] = [

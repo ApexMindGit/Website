@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { CONTACT } from "./nav-data";
 import Button from "./button";
+import MediaVideo from "./media-video";
 
 export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return diagonal ? (
@@ -54,16 +55,10 @@ export function MediaSlot({
   if (!media) return <ImageSlot label={label} ratio={ratio} />;
   return (
     <div className="media-slot">
-      <video
-        className="media-slot-video"
+      <MediaVideo
         src={media.src}
         poster={media.poster}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-label={`${label} — product demo`}
+        label={label}
       />
     </div>
   );

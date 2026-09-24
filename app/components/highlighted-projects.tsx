@@ -18,8 +18,8 @@ export default function HighlightedProjects() {
             that made a real impact.
           </h2>
           <p className="works-sub">
-            From AI automation to SaaS products and technical SEO, we help teams
-            design, build, and ship software that moves the numbers.
+            AI automation, SaaS products, technical SEO — a look at what
+            we&rsquo;ve designed, built, and shipped for real teams.
           </p>
           <Button href="/case-studies">All projects</Button>
         </div>
@@ -42,6 +42,14 @@ export default function HighlightedProjects() {
                     <span className="work-badge">{study.industry}</span>
                   </div>
                   <h3 className="work-card-title">{sub}</h3>
+                  <p className="work-card-desc">{study.summary}</p>
+                  <div className="work-services">
+                    {study.services.map((s) => (
+                      <span key={s} className="work-service-tag">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
                   <span className="work-pill">{study.result}</span>
                   <span className="work-card-cta">
                     <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />

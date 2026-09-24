@@ -2,6 +2,14 @@
 
 Status: DRAFT. No option is approved for publication. Choose or edit the variants before implementation. No website code has been written.
 
+> **Superseded on the live site (2026-09-24):** the capability structure has moved
+> to **5 dedicated pages** — Software development, **Applied AI** (route
+> `/what-we-do/intelligence`), Workflow automation, **RPA** (`/what-we-do/rpa`),
+> and **Web development & SEO** (`/what-we-do/web-seo`) — one per Services-accordion
+> subheading. Apex Mind **does not build mobile apps**; ignore "mobile app(s)" and
+> the older "three primary capabilities" / "Intelligence" framing in the options
+> below. Live copy is in the page files; see `PRD.md` §4/§7 for the current map.
+
 ## Confirmed decisions
 
 - Primary audience: startup founders. Secondary audience: government procurement teams.
