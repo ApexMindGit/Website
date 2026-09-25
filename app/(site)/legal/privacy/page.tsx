@@ -16,7 +16,8 @@ export default function Privacy() {
         {
           heading: "Information we collect",
           body: [
-            "When you contact us through the inquiry form, we collect the details you choose to provide — such as your name, email address, and the message you send. We collect this to respond to your inquiry.",
+            "When you contact us through the inquiry form, we collect the details you choose to provide — your name and email address, and optionally your company, website, phone or WhatsApp number, the capability you need, timeline, approximate budget, preferred call time, and the message you send. We collect this to respond to your inquiry.",
+            "Inquiries are stored in a Google Sheet in Apex Mind's Google account, and a notification is sent to us by email. Google processes this data on our behalf; access within Apex Mind is limited to the people who respond to inquiries.",
           ],
         },
         {

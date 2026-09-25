@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
 import { Mail, MessageCircle } from "lucide-react";
 import Button from "./button";
 import { CONTACT, capabilityChildren } from "./nav-data";
@@ -61,6 +63,7 @@ export default function InquiryForm() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [startedAt, setStartedAt] = useState("");
+  const errorRef = useRef<HTMLParagraphElement>(null);
 
   // Resolve the currency after hydration so server and client markup match.
   useEffect(() => {
@@ -76,9 +79,12 @@ export default function InquiryForm() {
     setSubmitting(true);
     setError(null);
     try {
-      const result = await submitInquiry(new FormData(e.currentTarget));
+      const data = new FormData(e.currentTarget);
+      const result = await submitInquiry(data);
       if (result.ok) {
-        router.push("/contact/received");
+        // Conversion event only — no personal data is sent to analytics.
+        track("inquiry_submitted", { type: String(data.get("type")) });
+        router.push(data.get("type") === "call" ? "/contact/received?type=call" : "/contact/received");
         return;
       }
       setError(result.error);
@@ -88,10 +94,17 @@ export default function InquiryForm() {
     setSubmitting(false);
   }
 
+  // Move focus to the error so keyboard and screen-reader users hear it.
+  useEffect(() => {
+    if (error) errorRef.current?.focus();
+  }, [error]);
+
   const activeCurrency = currencies.find((c) => c.code === currency)!;
 
   return (
-    <form className="contact-card" onSubmit={onSubmit} aria-busy={submitting}>
+    // method="post": if JS hasn't loaded, a native submit must never put
+    // personal details in the URL.
+    <form className="contact-card" method="post" onSubmit={onSubmit} aria-busy={submitting}>
       <input type="hidden" name="startedAt" value={startedAt} />
       {/* Honeypot: hidden from people, filled in by naive bots. */}
       <div className="contact-hp" aria-hidden="true">
@@ -331,10 +344,14 @@ export default function InquiryForm() {
               : CONTACT.responseNote}
           </p>
           {error && (
-            <p className="contact-error" role="alert">
+            <p className="contact-error" role="alert" tabIndex={-1} ref={errorRef}>
               {error}
             </p>
           )}
+          <p className="contact-privacy">
+            By sending this you agree to our{" "}
+            <Link href="/legal/privacy">privacy policy</Link>.
+          </p>
         </div>
       </div>
     </form>

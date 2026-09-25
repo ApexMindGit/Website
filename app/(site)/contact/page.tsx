@@ -6,7 +6,18 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Contact Apex Mind to discuss software development, AI, or automation. Send an inquiry, request a call, or use WhatsApp. Response within one working day.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact Apex Mind",
+    description:
+      "Tell us what you're building. Send an inquiry or request a call — we respond within one working day.",
+    url: "/contact",
+  },
 };
+
+// The inquiry server action runs on this route; Apps Script can take a few
+// seconds on a cold start, so allow more than the default function timeout.
+export const maxDuration = 30;
 
 export default function Contact() {
   return (
