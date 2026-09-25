@@ -90,7 +90,7 @@ untouched.
 /case-studies/[slug]       Case study detail (SSG per study)
 /about                     Founder-led about
 /government                Public-sector / procurement
-/contact                   Inquiry form (no backend — routes to /received)
+/contact                   Inquiry form → Google Sheet + email → /received
 /contact/received          Confirmation
 /start                     Lightweight project finder
 /legal/{privacy,terms,cookies}   Draft legal (pending review)
@@ -198,8 +198,10 @@ Note: the `/what-we-do/intelligence` route keeps its slug but is branded
   but the site is authored in plain CSS — don't assume utility classes).
 - Icons: `lucide-react`. Fonts: Inter + JetBrains Mono via `@fontsource`
   (packaged locally).
-- No backend/DB/analytics yet. The contact form routes to `/contact/received`;
-  nothing is sent or persisted.
+- The contact form posts via a server action (`app/(site)/contact/actions.ts`)
+  to a Google Apps Script web app that appends a row to a Google Sheet and
+  emails a notification. Setup: `google-apps-script/README.md`. Needs
+  `GOOGLE_SCRIPT_URL` + `GOOGLE_SCRIPT_SECRET`. No DB.
 
 ```bash
 pnpm install
@@ -237,6 +239,6 @@ route ships to production.
 
 The full site is built (all routes render, build passes) and `robots` is now
 set to **indexable**. Outstanding before/at launch: founder copy sign-off,
-backend for the contact form (email/Sheets + anti-spam), analytics, final
+Google Sheet setup + env vars for the contact form (Turnstile if spam appears), analytics, final
 SEO/security headers, and a purpose-made 1200×630 OG share image (currently a
 `/icon.png` stopgap).

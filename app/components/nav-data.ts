@@ -70,6 +70,7 @@ export const footerColumns: { title: string; links: NavChild[] }[] = [
       { href: "/solutions", label: "Solutions" },
       { href: "/how-we-work", label: "How we work" },
       { href: "/case-studies", label: "Case studies" },
+      { href: "/blog", label: "Blog" },
       { href: "/about", label: "About" },
       { href: "/government", label: "Government" },
     ],

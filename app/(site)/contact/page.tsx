@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Mail, MessageCircle } from "lucide-react";
-import { PageHero } from "../../components/ui";
-import { Arrow } from "../../components/ui";
 import InquiryForm from "../../components/inquiry-form";
-import { CONTACT } from "../../components/nav-data";
+import { CTABand } from "../../components/ui";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -14,47 +11,33 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <>
-      <PageHero
-        eyebrow="Contact"
+      <section id="contact-form" className="contact-page container">
+        <header className="contact-head">
+          <p className="eyebrow">Contact</p>
+          <h1 className="display-md">Tell us what you&rsquo;re building.</h1>
+          <p className="contact-intro">
+            Whether it&rsquo;s a defined project or you&rsquo;d rather talk it
+            through first, share the problem and where things stand today.
+            We&rsquo;ll reply within one working day with a suggested next step.
+          </p>
+        </header>
+
+        <InquiryForm />
+      </section>
+
+      <CTABand
+        eyebrow="Ready when you are"
         title={
           <>
-            A conversation
+            Have a problem
             <br />
-            starts here.
+            worth solving?
           </>
         }
-        intro="Tell us what you are trying to solve. Send an inquiry, request a call, or reach us on WhatsApp."
+        body="Tell us what you're building or where your current workflow gets in the way. Share as much or as little as you have today."
+        ctaHref="#contact-form"
+        ctaLabel="Start your inquiry"
       />
-
-      <section className="section container">
-        <div className="contact-layout">
-          <InquiryForm />
-          <div className="contact-aside">
-            <a className="contact-affordance" href={`mailto:${CONTACT.email}`}>
-              <Mail size={20} strokeWidth={1.5} />
-              <span>
-                <span className="mono-sm">Email</span>
-                <br />
-                {CONTACT.email}
-              </span>
-              <Arrow diagonal />
-            </a>
-            <a className="contact-affordance" href={CONTACT.whatsappHref}>
-              <MessageCircle size={20} strokeWidth={1.5} />
-              <span>
-                <span className="mono-sm">WhatsApp</span>
-                <br />
-                {CONTACT.whatsappNumber}
-              </span>
-              <Arrow diagonal />
-            </a>
-            <p className="contact-note">
-              {CONTACT.responseNote} A call request does not represent a
-              scheduled appointment — we will follow up to arrange a time.
-            </p>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

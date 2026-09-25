@@ -110,10 +110,14 @@ export function CTABand({
   eyebrow = "Start a conversation",
   title,
   body,
+  ctaHref = "/contact",
+  ctaLabel = "Get a Custom Quote",
 }: {
   eyebrow?: string;
   title: React.ReactNode;
   body?: React.ReactNode;
+  ctaHref?: string;
+  ctaLabel?: string;
 }) {
   const tickerItems = [
     "Software development",
@@ -132,8 +136,8 @@ export function CTABand({
         <h2 className="display-md">{title}</h2>
         {body && <p className="cta-band-body">{body}</p>}
         <div className="actions">
-          <Button href="/contact" variant="light">
-            Get a Custom Quote
+          <Button href={ctaHref} variant="light">
+            {ctaLabel}
           </Button>
           <a className="text-link" href={CONTACT.whatsappHref}>
             <Arrow diagonal />

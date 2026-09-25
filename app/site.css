@@ -746,6 +746,7 @@ a.feature-card:hover {
   position: relative;
   overflow: hidden;
   min-height: 85vh;
+  min-height: 85dvh; /* handle mobile browser chrome (address bar) */
   padding: clamp(32px, 3.4vw, 56px);
 }
 
@@ -1058,6 +1059,7 @@ a.feature-card:hover {
   top: 0;
   display: block;
   min-height: 100vh;
+  min-height: 100dvh; /* full-screen sticky panel, mobile-toolbar-safe */
   background: #fff;
   color: #111;
   text-decoration: none;
@@ -1071,6 +1073,7 @@ a.feature-card:hover {
   gap: 56px;
   align-items: center;
   min-height: 100vh;
+  min-height: 100dvh;
   padding-block: 96px;
 }
 /* Alternate image side: odd cards keep image on the right, even cards flip it
@@ -2160,26 +2163,410 @@ a.feature-card:hover {
 }
 
 /* --- Contact ---------------------------------------------------------------*/
-.contact-layout {
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.contact-page {
+  scroll-margin-top: 72px; /* clear the sticky header when the CTA jumps back */
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(72px, 9vw, 128px);
+}
+
+.contact-head {
+  max-width: 680px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
+  text-align: center;
+}
+
+.contact-head .eyebrow {
+  color: #777;
+}
+
+.contact-head h1 {
+  margin: 16px 0 20px;
+  letter-spacing: -0.05em;
+}
+
+.contact-intro {
+  color: #555;
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 580px;
+  margin-inline: auto;
+}
+
+.contact-card {
+  max-width: 1200px;
+  margin-inline: auto;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.03), 0 20px 50px -30px rgb(0 0 0 / 0.18);
+  overflow: hidden;
+}
+
+/* Tabs are native radios so arrow keys and screen readers work for free. */
+.contact-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background: #f3f3f4;
+}
+
+.contact-tab {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 22px 24px;
+  cursor: pointer;
+  color: #666;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.contact-tab:hover {
+  color: #111;
+}
+
+.contact-tab[data-active="true"] {
+  background: #fff;
+  color: #111;
+}
+
+.contact-tab input[type="radio"] {
+  flex: none;
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  border-color: #cfcfd4;
+  background: #fff;
+  transition: border-color 200ms ease;
+}
+
+.contact-tab input[type="radio"]:checked {
+  border: 5px solid var(--color-apex-red);
+}
+
+.contact-tab input[type="radio"]:checked::before {
+  display: none;
+}
+
+.contact-tab input[type="radio"]:focus-visible {
+  outline: 2px solid var(--color-apex-red);
+  outline-offset: 3px;
+}
+
+.contact-tab > span {
+  display: grid;
+  gap: 2px;
+}
+
+.contact-tab-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.contact-tab-sub {
+  font-size: 14px;
+  color: #777;
+}
+
+.contact-fields {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
+  gap: 12px;
+  padding: 24px;
 }
 
-.contact-aside {
+.contact-row-3 {
+  grid-column: 1 / -1;
   display: grid;
-  gap: 24px;
-  align-content: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
-.contact-aside .contact-affordance {
-  border-color: #ddd;
+.contact-card input:not([type="radio"]),
+.contact-card textarea,
+.contact-card select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  color: #111;
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.contact-note {
-  color: #777;
+.contact-card ::placeholder {
+  color: #8a8a90;
+}
+
+.contact-card input:not([type="radio"]):focus,
+.contact-card textarea:focus,
+.contact-card select:focus {
+  outline: none;
+  border-color: var(--color-apex-red);
+  box-shadow: 0 0 0 3px rgb(57 200 255 / 0.18);
+}
+
+.contact-card textarea {
+  min-height: 132px;
+  resize: vertical;
+}
+
+.contact-card textarea.short {
+  min-height: 96px;
+}
+
+.contact-card select {
+  appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23777' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+}
+
+/* Placeholder option (disabled, empty value) reads like a placeholder. */
+.contact-card select:has(option[value=""]:checked) {
+  color: #8a8a90;
+}
+
+.contact-card option {
+  color: #111;
+}
+
+/* Currency + amount share one bordered control. */
+.budget-input {
+  display: flex;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.budget-input:focus-within {
+  border-color: var(--color-apex-red);
+  box-shadow: 0 0 0 3px rgb(57 200 255 / 0.18);
+}
+
+.contact-card .budget-input select,
+.contact-card .budget-input input:not([type="radio"]) {
+  border: 0;
+  box-shadow: none;
+  min-height: 46px;
+}
+
+.contact-card .budget-input select {
+  flex: none;
+  width: auto;
+  padding-right: 34px;
+  background-position: right 10px center;
+  background-color: #f7f7f8;
+  border-right: 1px solid #e4e4e7;
+  border-radius: 8px 0 0 8px;
+  color: #111;
+}
+
+.contact-card .budget-input input {
+  min-width: 0;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Call tab: email / WhatsApp segmented switch. */
+.contact-via {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 4px 4px 4px 16px;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+}
+
+.contact-via-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  color: #8a8a90;
+  white-space: nowrap;
+}
+
+.contact-segment {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  padding: 3px;
+  background: #f3f3f4;
+  border-radius: 7px;
+}
+
+.contact-segment label {
+  position: relative;
+  padding: 7px 14px;
+  border-radius: 5px;
   font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.contact-segment label[data-active="true"] {
+  background: #fff;
+  color: #111;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+}
+
+.contact-segment input[type="radio"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.contact-segment label:has(input:focus-visible) {
+  outline: 2px solid var(--color-apex-red);
+  outline-offset: 1px;
+}
+
+.contact-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 4px 24px 24px;
+}
+
+.contact-direct p {
+  font-size: 14px;
+  color: #555;
+  margin: 0 0 6px;
+}
+
+.contact-direct-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.contact-direct-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+  text-decoration: underline;
+  text-decoration-color: #ccc;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 160ms ease;
+}
+
+.contact-direct-links a:hover {
+  text-decoration-color: currentColor;
+}
+
+.contact-submit {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+  text-align: right;
+}
+
+.contact-hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-error {
+  max-width: 360px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff1f1;
+  color: #a4161a;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.contact-submit-note {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #888;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .contact-row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-row-3 > .field:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-tab {
+    padding: 16px 18px;
+  }
+
+  .contact-segment label {
+    padding: 7px 10px;
+  }
+
+  .contact-fields,
+  .contact-row-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-fields {
+    padding: 18px;
+  }
+
+  .contact-card-foot {
+    padding: 4px 18px 20px;
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .contact-submit {
+    justify-items: stretch;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-tab,
+  .contact-card input,
+  .contact-card textarea,
+  .contact-card select,
+  .budget-input,
+  .contact-segment label,
+  .contact-direct-links a {
+    transition: none;
+  }
 }
 
 /* --- Floating WhatsApp (fixed on production pages) --------------------------*/
@@ -2483,11 +2870,6 @@ a.feature-card:hover {
   .content-columns {
     grid-template-columns: 1fr;
     gap: 32px;
-  }
-
-  .contact-layout {
-    grid-template-columns: 1fr;
-    gap: 40px;
   }
 
   .site-footer-top {
@@ -2893,5 +3275,244 @@ a.cap-work-item:hover {
   .cap-hero-actions .btn {
     width: 100%;
     justify-content: flex-start;
+  }
+}
+
+/* ---------- Solutions: problem cards grouped by capability ---------- */
+.problem-group + .problem-group {
+  padding-top: 0;
+}
+
+.problem-group-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.problem-group-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9375rem;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.problem-group-link:hover,
+.problem-group-link:focus-visible {
+  opacity: 1;
+}
+
+/* ---------- Blog: /blog index + /blog/[slug] article (light theme) ---------- */
+.blog-index-date {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-mono, "JetBrains Mono Variable", monospace);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.blog-hero .eyebrow a {
+  color: inherit;
+}
+
+.blog-hero .eyebrow a:hover {
+  color: var(--color-apex-red);
+}
+
+.blog-title {
+  max-width: 18ch;
+  overflow-wrap: break-word;
+}
+
+.blog-prose {
+  min-width: 0;
+}
+
+.blog-prose h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  padding-top: 24px;
+  scroll-margin-top: 96px;
+}
+
+.blog-prose h3 {
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  display: grid;
+  gap: 10px;
+  padding-left: 1.25em;
+  color: #444;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.blog-prose ul {
+  list-style: disc;
+}
+
+.blog-prose ol {
+  list-style: decimal;
+}
+
+.blog-prose li::marker {
+  color: var(--color-apex-red);
+}
+
+.blog-prose a:not(.feature-card) {
+  color: #111;
+  text-decoration: underline;
+  text-decoration-color: var(--color-apex-red);
+  text-underline-offset: 3px;
+}
+
+.blog-prose strong {
+  color: #111;
+  font-weight: 600;
+}
+
+.blog-tldr {
+  padding: 24px 28px;
+  border-radius: 12px;
+  background: #f4f4f2;
+  border: 1px solid #e4e4e0;
+  border-left: 3px solid var(--color-apex-red);
+}
+
+.blog-tldr .mono-label,
+.blog-callout .mono-label,
+.blog-sources .mono-label {
+  display: block;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.blog-tldr ul {
+  font-size: 16px;
+}
+
+.blog-callout {
+  padding: 22px 26px;
+  border-radius: 12px;
+  background: #0a0a0a;
+}
+
+.blog-callout .mono-label {
+  color: var(--color-apex-red);
+}
+
+.content-columns .prose .blog-callout p {
+  color: #f5f5f2;
+  font-size: 18px;
+}
+
+.blog-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e4e4e0;
+  border-radius: 12px;
+}
+
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #444;
+}
+
+.blog-table caption {
+  caption-side: bottom;
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 13px;
+  color: #777;
+}
+
+.blog-table th,
+.blog-table td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #e4e4e0;
+}
+
+.blog-table thead th {
+  background: #f4f4f2;
+  color: #111;
+  font-weight: 600;
+}
+
+.blog-table tbody th {
+  color: #111;
+  font-weight: 600;
+}
+
+.blog-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.blog-faq {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid #ddd;
+}
+
+.blog-faq > div {
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.content-columns .prose .blog-faq p {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.blog-sources ol {
+  font-size: 14px;
+}
+
+.blog-aside {
+  position: sticky;
+  top: 112px;
+}
+
+.blog-toc {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  counter-reset: toc;
+}
+
+.blog-toc a {
+  color: #666;
+  transition: color 200ms var(--ease-standard);
+}
+
+.blog-toc a:hover {
+  color: #111;
+}
+
+@media (max-width: 900px) {
+  .blog-aside {
+    position: static;
+  }
+
+  .blog-table {
+    font-size: 14px;
+    min-width: 560px;
   }
 }

@@ -19,9 +19,6 @@ export default function Received() {
           day. If you requested a call, we will follow up to arrange a suitable
           time.
         </p>
-        <p className="caption muted">
-          This is a preview build — no inquiry was actually sent or stored yet.
-        </p>
         <div className="actions">
           <Button href="/">Back to home</Button>
           <Button href={CONTACT.whatsappHref} variant="secondary">
